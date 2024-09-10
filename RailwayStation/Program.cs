@@ -1,4 +1,4 @@
-﻿using RailwayStation.Models;
+﻿using RailwayStation.Models.Station;
 
 var station = new Station();
 
