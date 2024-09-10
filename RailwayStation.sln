@@ -5,6 +5,13 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayStation", "RailwayStation\RailwayStation.csproj", "{E3F78752-0D59-4BBA-9914-BFFE84B834FB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F938AECA-ADD8-4E11-A636-1506461CE06A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayStation.Models", "RailwayStation.Models\RailwayStation.Models.csproj", "{A3905905-FCA2-478A-8C7D-5EB4B46FDCA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{E3F78752-0D59-4BBA-9914-BFFE84B834FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3F78752-0D59-4BBA-9914-BFFE84B834FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3F78752-0D59-4BBA-9914-BFFE84B834FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3905905-FCA2-478A-8C7D-5EB4B46FDCA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3905905-FCA2-478A-8C7D-5EB4B46FDCA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3905905-FCA2-478A-8C7D-5EB4B46FDCA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3905905-FCA2-478A-8C7D-5EB4B46FDCA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
