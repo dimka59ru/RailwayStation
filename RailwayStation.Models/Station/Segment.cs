@@ -3,10 +3,10 @@ namespace RailwayStation.Models.Station;
 // Edge
 public class Segment
 {
-    public string Name { get; set; }
-    public Point From { get; set; }
-    public Point To { get; set; }
-    public int Length { get; set; }
+    public string Name { get; }
+    public Point From { get; }
+    public Point To { get; }
+    public int Length { get; }
 
     public Segment(string name, Point from, Point to, int length) {
         if (string.IsNullOrEmpty(name)) {
