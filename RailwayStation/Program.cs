@@ -16,7 +16,10 @@ foreach (var point in station.Points)
     PrintAdjacentPoints(point);    
 }
 
+// Поиск в ширину
 var result = FindPathAlgorithms.FindPath(station, 6, 3, new QueuePointStorage());
+
+FindPathAlgorithms.WaveFindPath(station, 6, 3);
 
 Console.ReadKey();
 
