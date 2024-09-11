@@ -46,17 +46,17 @@ public class Station
     }
 
     /// <summary>
-    /// Вывод смежных вершин
+    /// Вывод смежных вершин и расстояний до них
     /// </summary>
-    public List<Point> GetAdjacentPointList(Point point) 
+    public List<(Point Point, int Dist)> GetAdjacentPointList(Point point) 
     {
-        var result = new List<Point>();
+        var result = new List<(Point Point, int Dist)>();
 
         foreach (var segment in Segments) 
         {            
             if (segment.From == point) 
             {
-                result.Add(segment.To);
+                result.Add((segment.To, segment.Length));
             }
         }
         return result;

@@ -1,4 +1,5 @@
-﻿using RailwayStation.Models.Station;
+using RailwayStation.Algorithms;
+using RailwayStation.Models.Station;
 
 var station = new Station();
 
@@ -15,6 +16,7 @@ foreach (var point in station.Points)
     PrintAdjacentPoints(point);    
 }
 
+var result = FindPathAlgorithms.FindPath(station, 6, 3, new QueuePointStorage());
 
 Console.ReadKey();
 
@@ -34,7 +36,7 @@ void PrintAdjacentPoints(Point point)
     Console.Write($"{point.Name}: ");
     foreach (var adjacentPoint in station.GetAdjacentPointList(point))
     {
-        Console.Write(adjacentPoint.Name + ", ");
+        Console.Write($"{adjacentPoint.Point.Name}: {adjacentPoint.Dist}, ");
     }
     Console.WriteLine();
 }
