@@ -10,39 +10,58 @@ public class Station
 
     public Station() 
     {
-        var p1 = new Point("p1");
-        var p2 = new Point("p2");
-        var p3 = new Point("p3");
-        var p4 = new Point("p4");
-        var p5 = new Point("p5");
-        var p6 = new Point("p6");
-        var p7 = new Point("p7");
-        var p8 = new Point("p8");
-        var p9 = new Point("p9");
-        var p10 = new Point("p10");
+        //var p1 = new Point("p1");
+        //var p2 = new Point("p2");
+        //var p3 = new Point("p3");
+        //var p4 = new Point("p4");
+        //var p5 = new Point("p5");
+        //var p6 = new Point("p6");
+        //var p7 = new Point("p7");
+        //var p8 = new Point("p8");
+        //var p9 = new Point("p9");
+        //var p10 = new Point("p10");
+
+        //points.Add(p1);
+        //points.Add(p2);
+        //points.Add(p3);
+        //points.Add(p4);
+        //points.Add(p5);
+        //points.Add(p6);
+        //points.Add(p7);
+        //points.Add(p8);
+        //points.Add(p9);
+        //points.Add(p10);
+
+        //segments.Add(new Segment("segment 1", p1, p2, 10));
+        //segments.Add(new Segment("segment 2", p2, p3, 15));
+        //segments.Add(new Segment("segment 3", p3, p4, 8));
+        //segments.Add(new Segment("segment 4", p5, p6, 20));
+        //segments.Add(new Segment("segment 5", p6, p3, 12));
+        //segments.Add(new Segment("segment 6", p9, p7, 11));
+        //segments.Add(new Segment("segment 7", p7, p6, 13));
+        //segments.Add(new Segment("segment 8", p6, p8, 13));
+        //segments.Add(new Segment("segment 9", p7, p8, 18));
+        //segments.Add(new Segment("segment 10", p9, p10, 20));
+        //segments.Add(new Segment("segment 11", p10, p8, 12));
+
+        var p1 = new Point("A");
+        var p2 = new Point("M");
+        var p3 = new Point("N");
+        var p4 = new Point("P");
+        var p5 = new Point("B");        
 
         points.Add(p1);
         points.Add(p2);
         points.Add(p3);
         points.Add(p4);
-        points.Add(p5);
-        points.Add(p6);
-        points.Add(p7);
-        points.Add(p8);
-        points.Add(p9);
-        points.Add(p10);
-        
-        segments.Add(new Segment("segment 1", p1, p2, 10));
-        segments.Add(new Segment("segment 2", p2, p3, 15));
-        segments.Add(new Segment("segment 3", p3, p4, 8));
-        segments.Add(new Segment("segment 4", p5, p6, 20));
-        segments.Add(new Segment("segment 5", p6, p3, 12));
-        segments.Add(new Segment("segment 6", p9, p7, 11));
-        segments.Add(new Segment("segment 7", p7, p6, 13));
-        segments.Add(new Segment("segment 8", p6, p8, 13));
-        segments.Add(new Segment("segment 9", p7, p8, 18));
-        segments.Add(new Segment("segment 10", p9, p10, 20));
-        segments.Add(new Segment("segment 11", p10, p8, 12));
+        points.Add(p5);        
+
+        segments.Add(new Segment("segment 1", p1, p2, 2));
+        segments.Add(new Segment("segment 2", p2, p3, 2));
+        segments.Add(new Segment("segment 3", p3, p5, 4));
+        segments.Add(new Segment("segment 4", p1, p4, 3));
+        segments.Add(new Segment("segment 5", p4, p5, 4));
+        segments.Add(new Segment("segment 6", p1, p5, 6));
     }
 
     /// <summary>
@@ -57,6 +76,10 @@ public class Station
             if (segment.From == point) 
             {
                 result.Add((segment.To, segment.Length));
+            }
+            if (segment.To == point) 
+            {
+                result.Add((segment.From, segment.Length));
             }
         }
         return result;

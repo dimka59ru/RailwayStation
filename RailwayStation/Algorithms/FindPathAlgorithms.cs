@@ -3,19 +3,17 @@ using RailwayStation.Models.Station;
 namespace RailwayStation.Algorithms;
 public static class FindPathAlgorithms
 {
-    //public static bool FindPath(Station station, Segment startSegment, Segment targetSegment, ISegmentStorage segmentStorage)
 
     /// <summary>
-    /// 
+    /// Общий алгоритм поиска. Если pointStorage стек, то ищем в глубину, если очередь, то в ширину
     /// </summary>
     /// <param name="station"></param>
     /// <param name="startSegment"></param>
     /// <param name="targetSegment"></param>
     /// <param name="pointStorage">Хранилище еще не посещенных узлов</param>
     /// <returns></returns>
-    public static bool FindPath(Station station, int startSegmentIndex, int targetSegmentIndex, IPointStorage pointStorage) 
-    {
-        // TODO Написать тест
+    public static bool TryFindPath(Station station, int startSegmentIndex, int targetSegmentIndex, IPointStorage pointStorage, out List<Point> foundPath) 
+    {        
         if (startSegmentIndex < 1 || startSegmentIndex > station.Segments.Count) 
         {
             throw new ArgumentOutOfRangeException($"{nameof(startSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
@@ -26,12 +24,14 @@ public static class FindPathAlgorithms
             throw new ArgumentOutOfRangeException($"{nameof(targetSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
         }
 
-        // Найдем узел To стартового сегмента и примем его за стартовый узел.
-        var startPoint = station.Segments[startSegmentIndex - 1].To;    
+        foundPath = [];
+
+        // Найдем узел From стартового сегмента и примем его за стартовый узел.
+        var startPoint = station.Segments[startSegmentIndex - 1].From;    
         var startPointIndex = station.Points.FindIndex(point => point == startPoint);
 
-        // Найдем узел From целевого сегмента и примем его за целевой узел.
-        var targetPoint = station.Segments[targetSegmentIndex - 1].From;
+        // Найдем узел To целевого сегмента и примем его за целевой узел.
+        var targetPoint = station.Segments[targetSegmentIndex - 1].To;
         var targetPointIndex = station.Points.FindIndex(point => point == targetPoint);
 
         // в начале поиска расстояние до всех узлов кроме начального равны ∞        
@@ -89,8 +89,8 @@ public static class FindPathAlgorithms
     }
 
 
-    public static bool WaveFindPath(Station station, int startSegmentIndex, int targetSegmentIndex) {
-        // TODO Написать тест
+    public static bool TryFindPathWaveMethod(Station station, int startSegmentIndex, int targetSegmentIndex, out List<Point> foundPath) 
+    {        
         if (startSegmentIndex < 1 || startSegmentIndex > station.Segments.Count) 
         {
             throw new ArgumentOutOfRangeException($"{nameof(startSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
@@ -101,48 +101,53 @@ public static class FindPathAlgorithms
             throw new ArgumentOutOfRangeException($"{nameof(targetSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
         }
 
-        // Найдем узел To стартового сегмента и примем его за стартовый узел.
-        var startPoint = station.Segments[startSegmentIndex - 1].To;        
+        foundPath = [];
 
-        // Найдем узел From целевого сегмента и примем его за целевой узел.
-        var targetPoint = station.Segments[targetSegmentIndex - 1].From;     
+        // Найдем узел From стартового сегмента и примем его за стартовый узел.
+        var startPoint = station.Segments[startSegmentIndex - 1].From;        
 
-        int lastMark = 0; 
-        MarkPoints(station, startPoint, targetPoint, lastMark);
+        // Найдем узел To целевого сегмента и примем его за целевой узел.
+        var targetPoint = station.Segments[targetSegmentIndex - 1].To;     
 
+        int d = 0;
+        // стартовая ячейка помечена в 0
+        startPoint.Mark = 0;
+        bool stop;
+        do 
+        {
+            stop = true; // предполагаем, что все свободные точки уже помечены
+            foreach (var point in station.Points) 
+            {
+                if (point.Mark == d) 
+                {
+                    var neighbours = station.GetAdjacentPointList(point);
+                    // Проходим по всем не помеченным соседям
+                    foreach (var p in neighbours.Select(neighbour => neighbour.Point).Where(point => point.Mark is null)) 
+                    {
+                        stop = false;    // найдены непомеченные клетки
+                        p.Mark = d + 1;  // распространяем волну
+                    }                        
+                }
+            }
+            d++;
+        } while (!stop && targetPoint.Mark is null);         
 
-        Console.WriteLine();
-
-        // Алгоритм не работает, пока не переделаем GetAdjacentPointList чтоб было не From To, а просто связи
-        // Или сделать подобный алгоритм, но в обратную сторону
+        // Восстанавливаем путь
         if (targetPoint.Mark != null) 
         {
             var currentPoint = targetPoint;
             while (currentPoint != startPoint) 
             {
-                Console.Write($"{currentPoint.Name} - ");
+                foundPath.Add(currentPoint);                
                 var neighbours = station.GetAdjacentPointList(currentPoint);
                 currentPoint = neighbours.First(p => p.Point.Mark == currentPoint.Mark - 1).Point;
             }
+            foundPath.Add(startPoint);           
             return true;
         }
 
         return false;
-    }
-
-    private static void MarkPoints(Station station, Point startPoint, Point targetPoint, int lastMark) 
-    {
-        startPoint.Mark = lastMark;
-        var neighbours = station.GetAdjacentPointList(startPoint);
-        while (targetPoint.Mark is null && neighbours.Count > 0) 
-        {
-            lastMark++;
-            foreach (var neighbour in neighbours) 
-            {               
-                MarkPoints(station, neighbour.Point, targetPoint, lastMark);
-            }
-        }        
-    }
+    }    
 
     public static int FindIndex<T>(this IEnumerable<T> list, Func<T, bool> predicate) 
     {
