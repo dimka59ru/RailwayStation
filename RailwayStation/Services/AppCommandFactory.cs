@@ -3,11 +3,11 @@ using RailwayStation.Models;
 
 namespace RailwayStation.Services;
 
-public interface IAppCommandeFactory 
+public interface IAppCommandFactory 
 {
     AppCommand GetCommand(string input);
 }
-public class AppCommandFactory : IAppCommandeFactory
+public class AppCommandFactory : IAppCommandFactory
 {
     private readonly IUserInterface userInterface;
 
@@ -17,16 +17,10 @@ public class AppCommandFactory : IAppCommandeFactory
     }
     public AppCommand GetCommand(string input) 
     {
-        switch (input) 
-        {
-            case "q":
-            case "quit":
-                return new QuitCommand(userInterface);
-            case "?":
-                return new HelpCommand(userInterface);
-
-            default:
-                return new UnknownCommand(userInterface);
-        }
+        return input.ToLower() switch {
+            "q" or "quit" => new QuitCommand(userInterface),
+            "?" => new HelpCommand(userInterface),
+            _ => new UnknownCommand(userInterface),
+        };
     }
 }

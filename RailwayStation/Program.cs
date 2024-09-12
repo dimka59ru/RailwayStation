@@ -1,23 +1,17 @@
+using Microsoft.Extensions.DependencyInjection;
 using RailwayStation.Algorithms;
 using RailwayStation.Infrastructure;
+using RailwayStation.Models;
 using RailwayStation.Models.Station;
 using RailwayStation.Services;
 
-var userInterface = new ConsoleUserInterface();
-var commandFactory = new AppCommandFactory(userInterface);
+IServiceCollection services = new ServiceCollection();
+ConfigureServices(services);
+IServiceProvider serviceProvider = services.BuildServiceProvider();
 
-var response = commandFactory.GetCommand("?").Run();
-while(!response.souldQuit) 
-{ 
-    var input = userInterface.ReadValue("> ").ToLower();
-    var command = commandFactory.GetCommand(input);
-    response = command.Run();
+var service = serviceProvider.GetService<IStationInfoService>();
+service.Run();
 
-    if(!response.wasSuccessful)
-    {
-        userInterface.WriteMessage("Введите ? для получения справки по командам.");
-    }
-}
 
 var station = new Station();
 
@@ -65,6 +59,13 @@ else
 
 Console.ReadKey();
 
+
+void ConfigureServices(IServiceCollection services) 
+{
+    services.AddTransient<IUserInterface, ConsoleUserInterface>();
+    services.AddTransient<IStationInfoService,StationInfoService>();
+    services.AddTransient<IAppCommandFactory, AppCommandFactory>();
+}
 
 void PrintSegments(Station station)
 {
