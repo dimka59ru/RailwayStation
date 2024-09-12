@@ -5,7 +5,7 @@ namespace RailwayStation.Algorithms;
 
 public class FindPathOnStationAlgo : IFindPathOnStationAlgo
 {
-    public bool TryFindPathWithoutWeignt(Station station, int startSegmentIndex, int targetSegmentIndex, out List<Point> foundPath) 
+    public bool TryFindPathWithoutWeignt(StationBase station, int startSegmentIndex, int targetSegmentIndex, out List<Point> foundPath) 
     {
         if (startSegmentIndex < 1 || startSegmentIndex > station.Segments.Count) {
             throw new ArgumentOutOfRangeException($"{nameof(startSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
@@ -57,5 +57,5 @@ public class FindPathOnStationAlgo : IFindPathOnStationAlgo
         return false;
     }
 
-    public bool TryFindPathWithWeignt(Station graph, int startIndex, int targetIndex, out List<Point> foundPath) => throw new NotImplementedException();
+    public bool TryFindPathWithWeignt(StationBase graph, int startIndex, int targetIndex, out List<Point> foundPath) => throw new NotImplementedException();
 }

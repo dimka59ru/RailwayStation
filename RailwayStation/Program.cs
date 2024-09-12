@@ -39,7 +39,8 @@ void ConfigureServices(IServiceCollection services)
     services.AddTransient<IUserInterface, ConsoleUserInterface>();
     services.AddTransient<IStationInfoService,StationInfoService>();
     services.AddTransient<IAppCommandFactory, AppCommandFactory>();
-    services.AddTransient<IFindPathOnStationAlgo, FindPathOnStationAlgo>();    
+    services.AddTransient<IFindPathOnStationAlgo, FindPathOnStationAlgo>();
+    services.AddSingleton<StationBase, Station>();
 }
 
 void PrintSegments(Station station)

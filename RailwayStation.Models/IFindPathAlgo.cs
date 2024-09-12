@@ -9,4 +9,4 @@ public interface IFindPathAlgo<G, V>
     bool TryFindPathWithWeignt(G graph, int startIndex, int targetIndex, out List<V> foundPath);
 }
 
-public interface IFindPathOnStationAlgo : IFindPathAlgo<Station.Station, Point> { }
+public interface IFindPathOnStationAlgo : IFindPathAlgo<StationBase, Point> { }

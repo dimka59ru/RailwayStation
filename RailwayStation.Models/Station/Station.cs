@@ -1,14 +1,38 @@
 namespace RailwayStation.Models.Station;
 
-public class Station
+public abstract class StationBase
+{
+    public abstract IReadOnlyList<Point> Points { get; }
+    public abstract IReadOnlyList<Segment> Segments { get; }
+    public abstract IReadOnlyList<Track> Traks { get; }
+
+    /// <summary>
+    /// Вывод смежных вершин и расстояний до них
+    /// </summary>
+    public List<(Point Point, int Dist)> GetAdjacentPointList(Point point) {
+        var result = new List<(Point Point, int Dist)>();
+
+        foreach (var segment in Segments) {
+            if (segment.From == point) {
+                result.Add((segment.To, segment.Length));
+            }
+            if (segment.To == point) {
+                result.Add((segment.From, segment.Length));
+            }
+        }
+        return result;
+    }
+}
+
+public class Station : StationBase
 {
     private readonly List<Point> points = [];
     private readonly List<Segment> segments = [];
     private readonly List<Track> traks = [];
 
-    public IReadOnlyList<Point> Points => points;
-    public IReadOnlyList<Segment> Segments => segments;
-    public IReadOnlyList<Track> Traks => traks;
+    public override  IReadOnlyList<Point> Points => points;
+    public override  IReadOnlyList<Segment> Segments => segments;
+    public override  IReadOnlyList<Track> Traks => traks;
 
     public Station() 
     {
@@ -93,26 +117,5 @@ public class Station
         //segments.Add(new Segment("segment 4", p1, p4, 3));
         //segments.Add(new Segment("segment 5", p4, p5, 4));
         //segments.Add(new Segment("segment 6", p1, p5, 6));
-    }
-
-    /// <summary>
-    /// Вывод смежных вершин и расстояний до них
-    /// </summary>
-    public List<(Point Point, int Dist)> GetAdjacentPointList(Point point) 
-    {
-        var result = new List<(Point Point, int Dist)>();
-
-        foreach (var segment in Segments) 
-        {            
-            if (segment.From == point) 
-            {
-                result.Add((segment.To, segment.Length));
-            }
-            if (segment.To == point) 
-            {
-                result.Add((segment.From, segment.Length));
-            }
-        }
-        return result;
-    }
+    }    
 }

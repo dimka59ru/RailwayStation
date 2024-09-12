@@ -6,12 +6,15 @@ namespace RailwayStation.Infrastructure.Commands;
 public class FindPathCommand : NonTerminatingCommand
 {
     private readonly IFindPathOnStationAlgo findPathAlgo;
+    private readonly StationBase station;
+
     public int? FromIndex { get; private set; }
     public int? TargetIndex { get; private set; }
 
-    public FindPathCommand(IUserInterface userInterface, IFindPathOnStationAlgo findPathAlgo) : base(userInterface) 
+    public FindPathCommand(IUserInterface userInterface, IFindPathOnStationAlgo findPathAlgo, StationBase station) : base(userInterface) 
     {
         this.findPathAlgo = findPathAlgo ?? throw new ArgumentNullException(nameof(findPathAlgo));
+        this.station = station ?? throw new ArgumentNullException(nameof(station));
     }
 
     public override (bool wasSuccessful, bool souldQuit) Run() 
@@ -27,9 +30,7 @@ public class FindPathCommand : NonTerminatingCommand
     }    
 
     internal override bool InternalCommand() 
-    {
-        var station = new Station();
-
+    { 
         if (FromIndex == null || TargetIndex == null) 
         {
             UserInterface.WriteMessage($"Не заданы {nameof(FromIndex)} и/или {nameof(TargetIndex)}");
