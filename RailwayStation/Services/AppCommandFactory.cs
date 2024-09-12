@@ -25,8 +25,8 @@ public class AppCommandFactory : IAppCommandeFactory
             case "?":
                 return new HelpCommand(userInterface);
 
-            default: throw new NotImplementedException();
-                //return new UnknownCommand(userInterface);
+            default:
+                return new UnknownCommand(userInterface);
         }
     }
 }

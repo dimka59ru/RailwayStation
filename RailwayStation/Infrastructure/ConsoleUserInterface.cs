@@ -15,4 +15,10 @@ public class ConsoleUserInterface : IUserInterface
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine(message);
     }
+
+    public void WriteWarning(string message) 
+    {
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine(message);
+    }
 }

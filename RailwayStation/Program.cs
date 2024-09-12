@@ -12,6 +12,11 @@ while(!response.souldQuit)
     var input = userInterface.ReadValue("> ").ToLower();
     var command = commandFactory.GetCommand(input);
     response = command.Run();
+
+    if(!response.wasSuccessful)
+    {
+        userInterface.WriteMessage("Введите ? для получения справки по командам.");
+    }
 }
 
 var station = new Station();
