@@ -26,6 +26,7 @@ public class AppCommandFactory : IAppCommandFactory
         return input.ToLower() switch {
             "q" or "quit" => new QuitCommand(userInterface),
             "f" or "find" => new FindPathCommand(userInterface, findPathAlgo, station),
+            "p" or "print" => new PrintSegmentsCommand(userInterface, station),
             "?" => new HelpCommand(userInterface),
             _ => new UnknownCommand(userInterface),
         };

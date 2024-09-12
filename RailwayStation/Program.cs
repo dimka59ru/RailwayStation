@@ -15,10 +15,6 @@ service.Run();
 
 var station = new Station();
 
-// Выведем список всех участков схемы станции
-// в виде [Порядковый Номер].[Имя].
-PrintSegments(station);
-
 Console.WriteLine();
 Console.WriteLine();
 
@@ -43,15 +39,7 @@ void ConfigureServices(IServiceCollection services)
     services.AddSingleton<StationBase, Station>();
 }
 
-void PrintSegments(Station station)
-{
-    foreach (var item in station.Segments.Select((value, i) => new { i, value.Name }))
-    {
-        var segmentName = item.Name;
-        var index = item.i;
-        Console.WriteLine($"[{index + 1}].[{segmentName}]");
-    }
-}
+
 
 void PrintAdjacentPoints(Point point)
 {

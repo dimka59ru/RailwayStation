@@ -10,6 +10,7 @@ public class HelpCommand : NonTerminatingCommand
     {
         UserInterface.WriteMessage("Команды:");
         UserInterface.WriteMessage("\tВыход (q)");
+        UserInterface.WriteMessage("\tНапечатать все участки схемы станции (p)");
         UserInterface.WriteMessage("\tПоиск пути (f)");
         UserInterface.WriteMessage("\tСправка (?)");
         return true;
