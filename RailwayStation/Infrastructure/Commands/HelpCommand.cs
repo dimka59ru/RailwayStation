@@ -6,7 +6,11 @@ public class HelpCommand : NonTerminatingCommand
     public HelpCommand(IUserInterface userInterface) : base(userInterface) {
     }
 
-    internal override bool InternalCommand() {
+    internal override bool InternalCommand() 
+    {
+        UserInterface.WriteMessage("Команды:");
+        UserInterface.WriteMessage("\tВыход (q)");
+        UserInterface.WriteMessage("\tСправка (?)");
         return true;
     }
 }
