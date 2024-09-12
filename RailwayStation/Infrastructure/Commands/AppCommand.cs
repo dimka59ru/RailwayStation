@@ -13,14 +13,14 @@ public abstract class AppCommand
     }
    
 
-    public (bool wasSuccessful, bool souldQuit) Run() 
-    {
+    public virtual (bool wasSuccessful, bool souldQuit) Run() 
+    {        
         return (InternalCommand(), isTerminatingCommand);
     }
 
     internal string GetParameter(string parameterName) 
     {
-        return UserInterface.ReadValue($"Enter {parameterName}:");
+        return UserInterface.ReadValue($"Введите {parameterName}: ");
     }
 
     internal abstract bool InternalCommand();
