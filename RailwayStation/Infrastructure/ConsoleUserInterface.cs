@@ -1,0 +1,18 @@
+using RailwayStation.Models;
+
+namespace RailwayStation.Infrastructure;
+public class ConsoleUserInterface : IUserInterface
+{
+    public string ReadValue(string message) 
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(message);
+        return Console.ReadLine();
+    }
+
+    public void WriteMessage(string message) 
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(message);
+    }
+}

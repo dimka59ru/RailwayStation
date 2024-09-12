@@ -1,5 +1,18 @@
 using RailwayStation.Algorithms;
+using RailwayStation.Infrastructure;
 using RailwayStation.Models.Station;
+using RailwayStation.Services;
+
+var userInterface = new ConsoleUserInterface();
+var commandFactory = new AppCommandFactory(userInterface);
+
+var response = commandFactory.GetCommand("?").Run();
+while(!response.souldQuit) 
+{ 
+    var input = userInterface.ReadValue("> ").ToLower();
+    var command = commandFactory.GetCommand(input);
+    response = command.Run();
+}
 
 var station = new Station();
 
