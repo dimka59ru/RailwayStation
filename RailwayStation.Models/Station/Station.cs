@@ -18,14 +18,21 @@ public class Station
             points.Add(new Point($"Т{i}"));
         }
 
-        var s1 = new Segment("О1", points[26], points[25], 7);
-        var s2 = new Segment("О2", points[25], points[22], 7);
-        var s3 = new Segment("О3", points[22], points[23], 3);
-        var s4 = new Segment("О4", points[27], points[24], 3);
-        var s5 = new Segment("О5", points[24], points[21], 11);
-        var s6 = new Segment("О6", points[29], points[28], 4);
-        var s7 = new Segment("О7", points[0], points[3], 2);
+        var s1 = new Segment("У1", points[26], points[25], 7);
+        var s2 = new Segment("У2", points[25], points[22], 7);
+        var s3 = new Segment("У3", points[22], points[23], 3);
+        var s4 = new Segment("У4", points[27], points[24], 3);
+        var s5 = new Segment("У5", points[24], points[21], 11);
+        var s6 = new Segment("У6", points[29], points[28], 4);
+        var s7 = new Segment("У7", points[0], points[3], 2);
 
+        segments.Add(s1);
+        segments.Add(s2);
+        segments.Add(s3);
+        segments.Add(s4);
+        segments.Add(s5);
+        segments.Add(s6);
+        segments.Add(s7);
 
         var track1 = new Track("Путь 1");
         track1.Segments.Add(s2);
