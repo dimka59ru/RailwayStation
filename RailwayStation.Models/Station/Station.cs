@@ -4,12 +4,36 @@ public class Station
 {
     private readonly List<Point> points = [];
     private readonly List<Segment> segments = [];
+    private readonly List<Track> traks = [];
 
     public IReadOnlyList<Point> Points => points;
     public IReadOnlyList<Segment> Segments => segments;
+    public IReadOnlyList<Track> Traks => traks;
 
     public Station() 
     {
+        // Все точки станции
+        for (int i = 1; i < 32; i++) 
+        {
+            points.Add(new Point($"Т{i}"));
+        }
+
+        var s1 = new Segment("О1", points[26], points[25], 7);
+        var s2 = new Segment("О2", points[25], points[22], 7);
+        var s3 = new Segment("О3", points[22], points[23], 3);
+        var s4 = new Segment("О4", points[27], points[24], 3);
+        var s5 = new Segment("О5", points[24], points[21], 11);
+        var s6 = new Segment("О6", points[29], points[28], 4);
+        var s7 = new Segment("О7", points[0], points[3], 2);
+
+
+        var track1 = new Track("Путь 1");
+        track1.Segments.Add(s2);
+
+        var track2 = new Track("Путь 2");
+        track2.Segments.Add(s4);
+        track2.Segments.Add(s5);
+
         //var p1 = new Point("p1");
         //var p2 = new Point("p2");
         //var p3 = new Point("p3");
@@ -44,24 +68,24 @@ public class Station
         //segments.Add(new Segment("segment 10", p9, p10, 20));
         //segments.Add(new Segment("segment 11", p10, p8, 12));
 
-        var p1 = new Point("A");
-        var p2 = new Point("M");
-        var p3 = new Point("N");
-        var p4 = new Point("P");
-        var p5 = new Point("B");        
+        //var p1 = new Point("A");
+        //var p2 = new Point("M");
+        //var p3 = new Point("N");
+        //var p4 = new Point("P");
+        //var p5 = new Point("B");        
 
-        points.Add(p1);
-        points.Add(p2);
-        points.Add(p3);
-        points.Add(p4);
-        points.Add(p5);        
+        //points.Add(p1);
+        //points.Add(p2);
+        //points.Add(p3);
+        //points.Add(p4);
+        //points.Add(p5);        
 
-        segments.Add(new Segment("segment 1", p1, p2, 2));
-        segments.Add(new Segment("segment 2", p2, p3, 2));
-        segments.Add(new Segment("segment 3", p3, p5, 4));
-        segments.Add(new Segment("segment 4", p1, p4, 3));
-        segments.Add(new Segment("segment 5", p4, p5, 4));
-        segments.Add(new Segment("segment 6", p1, p5, 6));
+        //segments.Add(new Segment("segment 1", p1, p2, 2));
+        //segments.Add(new Segment("segment 2", p2, p3, 2));
+        //segments.Add(new Segment("segment 3", p3, p5, 4));
+        //segments.Add(new Segment("segment 4", p1, p4, 3));
+        //segments.Add(new Segment("segment 5", p4, p5, 4));
+        //segments.Add(new Segment("segment 6", p1, p5, 6));
     }
 
     /// <summary>
