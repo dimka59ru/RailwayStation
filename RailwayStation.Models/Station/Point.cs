@@ -3,10 +3,7 @@ namespace RailwayStation.Models.Station;
 // Vertex
 public class Point
 {
-    public string Name { get; }
-
-    // Пометки для использования в волновом алгоритме поиска пути
-    public int? Mark { get; set; }
+    public string Name { get; }    
 
     public Point(string name) 
     {

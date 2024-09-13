@@ -1,3 +1,4 @@
+using RailwayStation.Helpers;
 using RailwayStation.Models.Station;
 
 namespace RailwayStation.Algorithms;
@@ -86,72 +87,5 @@ public static class FindPathAlgorithms
         }
 
         return false;
-    }
-
-
-    public static bool TryFindPathWaveMethod(Station station, int startSegmentIndex, int targetSegmentIndex, out List<Point> foundPath) 
-    {        
-        if (startSegmentIndex < 1 || startSegmentIndex > station.Segments.Count) 
-        {
-            throw new ArgumentOutOfRangeException($"{nameof(startSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
-        }
-
-        if (targetSegmentIndex < 1 || targetSegmentIndex > station.Segments.Count) 
-        {
-            throw new ArgumentOutOfRangeException($"{nameof(targetSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
-        }
-
-        foundPath = [];
-
-        // Найдем узел From стартового сегмента и примем его за стартовый узел.
-        var startPoint = station.Segments[startSegmentIndex - 1].From;        
-
-        // Найдем узел To целевого сегмента и примем его за целевой узел.
-        var targetPoint = station.Segments[targetSegmentIndex - 1].To;     
-
-        int d = 0;
-        // стартовая ячейка помечена в 0
-        startPoint.Mark = 0;
-        bool stop;
-        do 
-        {
-            stop = true; // предполагаем, что все свободные точки уже помечены
-            foreach (var point in station.Points) 
-            {
-                if (point.Mark == d) 
-                {
-                    var neighbours = station.GetAdjacentPointList(point);
-                    // Проходим по всем не помеченным соседям
-                    foreach (var p in neighbours.Select(neighbour => neighbour.Point).Where(point => point.Mark is null)) 
-                    {
-                        stop = false;    // найдены непомеченные клетки
-                        p.Mark = d + 1;  // распространяем волну
-                    }                        
-                }
-            }
-            d++;
-        } while (!stop && targetPoint.Mark is null);         
-
-        // Восстанавливаем путь
-        if (targetPoint.Mark != null) 
-        {
-            var currentPoint = targetPoint;
-            while (currentPoint != startPoint) 
-            {
-                foundPath.Add(currentPoint);                
-                var neighbours = station.GetAdjacentPointList(currentPoint);
-                currentPoint = neighbours.First(p => p.Point.Mark == currentPoint.Mark - 1).Point;
-            }
-            foundPath.Add(startPoint);           
-            return true;
-        }
-
-        return false;
-    }    
-
-    public static int FindIndex<T>(this IEnumerable<T> list, Func<T, bool> predicate) 
-    {
-        var matchingIndices = list.Select((value, index) => new { value, index }).Where(x => predicate(x.value)).Select(x => (int?)x.index);
-        return matchingIndices.FirstOrDefault() ?? -1;
-    }
+    }   
 }
