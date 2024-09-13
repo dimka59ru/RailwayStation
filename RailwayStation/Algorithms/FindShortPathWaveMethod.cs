@@ -16,6 +16,7 @@ public class FindShortPathWaveMethod : IFindPathOnStationStrategy
 
         var foundPath = new List<Point>();
 
+        // TODO - по хорошему надо искать путь как от From, так и от TO узла.
         // Найдем узел From стартового сегмента и примем его за стартовый узел.
         var startPoint = station.Segments[startSegmentIndex - 1].From;
         var startPointIndex = station.Points.FindIndex(point => point == startPoint);

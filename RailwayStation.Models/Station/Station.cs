@@ -66,6 +66,11 @@ public class Station : StationBase
         var s22 = new Segment("У22", points[7], points[8], 5);
         var s23 = new Segment("У23", points[8], points[10], 6);
         var s24 = new Segment("У24", points[10], points[11], 2);
+        var s25 = new Segment("У25", points[25], points[24], 2);
+        var s26 = new Segment("У26", points[22], points[21], 2);
+        var s27 = new Segment("У27", points[27], points[29], 2);
+        var s28 = new Segment("У28", points[24], points[28], 2);
+        var s29 = new Segment("У29", points[21], points[20], 3);
 
         segments.Add(s1);
         segments.Add(s2);
@@ -91,6 +96,11 @@ public class Station : StationBase
         segments.Add(s22);
         segments.Add(s23);
         segments.Add(s24);
+        segments.Add(s25);
+        segments.Add(s26);
+        segments.Add(s27);
+        segments.Add(s28);
+        segments.Add(s29);
 
 
         var track1 = new Track("Путь 1", [s2]);
