@@ -37,7 +37,7 @@ public class Station : StationBase
     public Station() 
     {
         // Все точки станции
-        for (int i = 1; i < 32; i++) 
+        for (int i = 1; i < 33; i++) 
         {
             points.Add(new Point($"Т{i}"));
         }
@@ -49,6 +49,23 @@ public class Station : StationBase
         var s5 = new Segment("У5", points[24], points[21], 11);
         var s6 = new Segment("У6", points[29], points[28], 4);
         var s7 = new Segment("У7", points[0], points[3], 2);
+        var s8 = new Segment("У8", points[3], points[30], 2);
+        var s9 = new Segment("У9", points[30], points[20], 21);
+        var s10 = new Segment("У10", points[20], points[19], 7);
+        var s11 = new Segment("У11", points[19], points[18], 1);
+        var s12 = new Segment("У12", points[1], points[2], 3);
+        var s13 = new Segment("У13", points[2], points[4], 2);
+        var s14 = new Segment("У14", points[4], points[15], 23);
+        var s15 = new Segment("У15", points[15], points[16], 2);
+        var s16 = new Segment("У16", points[16], points[17], 2);
+        var s17 = new Segment("У17", points[5], points[31], 1);
+        var s18 = new Segment("У18", points[31], points[14], 17);
+        var s19 = new Segment("У19", points[6], points[9], 2);
+        var s20 = new Segment("У20", points[9], points[12], 8);
+        var s21 = new Segment("У21", points[12], points[13], 8);
+        var s22 = new Segment("У22", points[7], points[8], 5);
+        var s23 = new Segment("У23", points[8], points[10], 6);
+        var s24 = new Segment("У24", points[10], points[11], 2);
 
         segments.Add(s1);
         segments.Add(s2);
@@ -57,13 +74,34 @@ public class Station : StationBase
         segments.Add(s5);
         segments.Add(s6);
         segments.Add(s7);
+        segments.Add(s8);
+        segments.Add(s9);
+        segments.Add(s10);
+        segments.Add(s11);
+        segments.Add(s12);
+        segments.Add(s13);
+        segments.Add(s14);
+        segments.Add(s15);
+        segments.Add(s16);
+        segments.Add(s17);
+        segments.Add(s18);
+        segments.Add(s19);
+        segments.Add(s20);
+        segments.Add(s21);
+        segments.Add(s22);
+        segments.Add(s23);
+        segments.Add(s24);
 
-        var track1 = new Track("Путь 1");
-        track1.Segments.Add(s2);
 
-        var track2 = new Track("Путь 2");
-        track2.Segments.Add(s4);
-        track2.Segments.Add(s5);
+        var track1 = new Track("Путь 1", [s2]);
+        var track2 = new Track("Путь 2", [s4, s5]); 
+        var track3 = new Track("Путь 3", [s6]);
+        var track4 = new Track("Путь 4", [s8, s9, s10]);
+        var track5 = new Track("Путь 5", [s13, s14, s15]);
+        var track6 = new Track("Путь 6", [s17, s18]);
+        var track7 = new Track("Путь 7", [s19, s20, s21]);
+        var track8 = new Track("Путь 8", [s23]);
+
 
         //var p1 = new Point("p1");
         //var p2 = new Point("p2");

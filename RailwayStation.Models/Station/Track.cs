@@ -2,11 +2,10 @@ namespace RailwayStation.Models.Station
 {
     public class Track
     {
-        public string Name { get; set; }
-        public List<Segment> Segments { get; } = [];
-
-        public override string ToString() => Name;
-        public Track(string name) 
+        public string Name { get; set; }     
+        public IReadOnlyList<Segment> Segments { get; }
+        
+        public Track(string name, List<Segment> segments) 
         {
             if (string.IsNullOrEmpty(name)) 
             {
@@ -14,6 +13,9 @@ namespace RailwayStation.Models.Station
             }
 
             Name = name;
+            Segments = segments;
         }
+
+        public override string ToString() => Name;
     }
 }
