@@ -1,3 +1,4 @@
+using RailwayStation.Algorithms;
 using RailwayStation.Models;
 using RailwayStation.Models.Station;
 using System.Text;
@@ -5,13 +6,13 @@ using System.Text;
 namespace RailwayStation.Infrastructure.Commands;
 public class FindPathCommand : NonTerminatingCommand
 {
-    private readonly IFindPathOnStationAlgo findPathAlgo;
+    private readonly IFindPathOnStationStrategy findPathAlgo;
     private readonly StationBase station;
 
     public int? FromIndex { get; private set; }
     public int? TargetIndex { get; private set; }
 
-    public FindPathCommand(IUserInterface userInterface, IFindPathOnStationAlgo findPathAlgo, StationBase station) : base(userInterface) 
+    public FindPathCommand(IUserInterface userInterface, IFindPathOnStationStrategy findPathAlgo, StationBase station) : base(userInterface) 
     {
         this.findPathAlgo = findPathAlgo ?? throw new ArgumentNullException(nameof(findPathAlgo));
         this.station = station ?? throw new ArgumentNullException(nameof(station));
@@ -36,10 +37,9 @@ public class FindPathCommand : NonTerminatingCommand
             UserInterface.WriteMessage($"Не заданы {nameof(FromIndex)} и/или {nameof(TargetIndex)}");
             return false;
         }
-
-        // Поиск кратчайшего пути волновым алгоритмом       
-        var result = findPathAlgo.TryFindPathWithoutWeignt(station, (int)FromIndex, (int)TargetIndex, out var foundPath);
-        if (result) 
+           
+        var foundPath = findPathAlgo.FindPath(station, (int)FromIndex, (int)TargetIndex);
+        if (foundPath.Count > 0) 
         {
 
             var pathBuilder = new StringBuilder();
@@ -54,7 +54,7 @@ public class FindPathCommand : NonTerminatingCommand
                 }
             }
 
-            UserInterface.WriteMessage($"Короткий путь от {FromIndex} к {TargetIndex} без учета длины участков:");
+            UserInterface.WriteMessage($"Короткий путь от {FromIndex} к {TargetIndex}:");
             UserInterface.WriteMessage($"{pathBuilder}");
         }
         else 

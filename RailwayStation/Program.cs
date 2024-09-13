@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using RailwayStation.Algorithms;
 using RailwayStation.Infrastructure;
 using RailwayStation.Models;
 using RailwayStation.Models.Station;
@@ -34,9 +33,8 @@ void ConfigureServices(IServiceCollection services)
 {
     services.AddTransient<IUserInterface, ConsoleUserInterface>();
     services.AddTransient<IStationInfoService,StationInfoService>();
-    services.AddTransient<IAppCommandFactory, AppCommandFactory>();
-    services.AddTransient<IFindPathOnStationAlgo, FindPathOnStationAlgo>();
-    services.AddSingleton<StationBase, Station>();
+    services.AddTransient<IAppCommandFactory, AppCommandFactory>();    
+    services.AddSingleton<StationBase, Station>(); 
 }
 
 
