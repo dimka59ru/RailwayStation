@@ -13,69 +13,108 @@ public class FindShortPathWaveMethod : IFindPathOnStationStrategy
         if (targetSegmentIndex < 1 || targetSegmentIndex > station.Segments.Count) {
             throw new ArgumentOutOfRangeException($"{nameof(targetSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
         }
+        
 
+        // Найдем узлы стартового сегмента
+        var startPointFrom = station.Segments[startSegmentIndex - 1].From;
+        var startPointFromIndex = station.Points.FindIndex(point => point == startPointFrom);
+
+        var startPointTo = station.Segments[startSegmentIndex - 1].To;
+        var startPointToIndex = station.Points.FindIndex(point => point == startPointTo);
+        
+
+        // Ищем от узла From заданного участка
+        var path1 = FindPathInternal(station, startPointFromIndex, targetSegmentIndex);
+
+        // Ищем от узла To заданного участка
+        var path2 = FindPathInternal(station, startPointToIndex, targetSegmentIndex);
+
+        if (path1.Count < path2.Count) {
+            return path1;
+        }
+        
+        return path2;       
+    }
+
+
+    private static List<Point> FindPathInternal(StationBase station, int startPointIndex, int targetSegmentIndex) 
+    {
         var foundPath = new List<Point>();
 
-        // TODO - по хорошему надо искать путь как от From, так и от TO узла.
-        // Найдем узел From стартового сегмента и примем его за стартовый узел.
-        var startPoint = station.Segments[startSegmentIndex - 1].From;
-        var startPointIndex = station.Points.FindIndex(point => point == startPoint);
+        // Найдем узлы целевого сегмента.
+        var targetPointFrom = station.Segments[targetSegmentIndex - 1].From;
+        var targetPointFromIndex = station.Points.FindIndex(point => point == targetPointFrom);
 
-        // Найдем узел To целевого сегмента и примем его за целевой узел.
-        var targetPoint = station.Segments[targetSegmentIndex - 1].To;
-        var targetPointIndex = station.Points.FindIndex(point => point == targetPoint);
+        var targetPointTo = station.Segments[targetSegmentIndex - 1].To;
+        var targetPointToIndex = station.Points.FindIndex(point => point == targetPointTo);
 
         // Массив, в котором будем помечать, на каком шаге посетили узел
         var marks = Enumerable.Repeat<int?>(null, station.Points.Count).ToArray();
 
         // стартовая ячейка помечена в 0
-        int d = 0;     
+        int d = 0;
         marks[startPointIndex] = d;
-        
+
         bool stop;
 
-        do 
-        {
+        do {
             stop = true; // предполагаем, что все свободные точки уже помечены
-            for (var i = 0; i < station.Points.Count; i++)
-            {  
-                if (marks[i] == d)
-                {
+            for (var i = 0; i < station.Points.Count; i++) {
+                if (marks[i] == d) {
                     var point = station.Points[i];
                     var neighbours = station.GetAdjacentPointList(point);
                     // Проходим по всем соседям
-                    for (var j = 0; j < neighbours.Count; j++) 
-                    {
+                    for (var j = 0; j < neighbours.Count; j++) {
                         var p = neighbours[j].Point;
                         var pIndex = station.Points.FindIndex(point => point == p);
 
-                        if (marks[pIndex] == null) 
-                        {   
+                        if (marks[pIndex] == null) {
                             // найдены непомеченные узлы                         
                             stop = false;
                             marks[pIndex] = d + 1; // распространяем волну
                         }
-                    }                    
+                    }
                 }
             }
             d++;
-        } while (!stop && marks[targetPointIndex] == null);
+        // Останвливаемся, если дошли до точки From или To целевого сегмента, или если идти больше некуда
+        } while (!stop && marks[targetPointFromIndex] == null && marks[targetPointToIndex] == null);
 
         // Восстанавливаем путь
-        if (marks[targetPointIndex] != null) 
+        int? targetPointIndex = null;
+        if (marks[targetPointFromIndex] != null) 
         {
+            targetPointIndex = targetPointFromIndex;
+        }
+        else if (marks[targetPointToIndex] != null) 
+        {
+            targetPointIndex = targetPointToIndex;
+        }
 
-            var currentPoint = targetPoint;
+        if (targetPointIndex != null)
+        {
+            var currentPoint = station.Points[targetPointIndex.Value];
+            
             while (d > 0) 
             {
                 foundPath.Add(currentPoint);
                 d--;
-                var pIndex = Array.FindIndex(marks, x => x == d);
-                currentPoint = station.Points[pIndex];
-            }            
-            foundPath.Add(startPoint);            
+                // Берем всех соседей текущей точки и находим такого соседа,
+                // у которого отметка (d меньше на 1, чем у текущего)
+                var neighbours = station.GetAdjacentPointList(currentPoint);
+                foreach (var neighbor in neighbours) 
+                {
+                    var pIndex = station.Points.FindIndex(point => point == neighbor.Point);
+                    if (marks[pIndex] == d) 
+                    {
+                        currentPoint = station.Points[pIndex];
+                        break;
+                    }
+                }
+            }
+            foundPath.Add(station.Points[startPointIndex]);
         }
 
         return foundPath;
-    }    
+    }
 }

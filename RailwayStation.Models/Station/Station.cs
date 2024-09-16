@@ -22,6 +22,22 @@ public abstract class StationBase
         }
         return result;
     }
+
+    public Segment? GetSegment(Point point) 
+    {
+        foreach (var segment in Segments) 
+        {
+            if (segment.From == point) 
+            {
+                return segment;
+            }
+            if (segment.To == point) 
+            {
+                return segment;
+            }
+        }
+        return null;
+    }
 }
 
 public class Station : StationBase
@@ -71,6 +87,15 @@ public class Station : StationBase
         var s27 = new Segment("У27", points[27], points[29], 2);
         var s28 = new Segment("У28", points[24], points[28], 2);
         var s29 = new Segment("У29", points[21], points[20], 3);
+        var s30 = new Segment("У30", points[3], points[2], 2);
+        var s32 = new Segment("У32", points[29], points[30], 1);
+        var s31 = new Segment("У31", points[19], points[16], 2);
+        var s33 = new Segment("У33", points[4], points[5], 2);
+        var s34 = new Segment("У34", points[15], points[14], 3);
+        var s35 = new Segment("У35", points[31], points[6], 2);
+        var s36 = new Segment("У36", points[14], points[13], 3);
+        var s37 = new Segment("У37", points[9], points[8], 2);
+        var s38 = new Segment("У38", points[12], points[10], 2);
 
         segments.Add(s1);
         segments.Add(s2);
@@ -101,6 +126,15 @@ public class Station : StationBase
         segments.Add(s27);
         segments.Add(s28);
         segments.Add(s29);
+        segments.Add(s30);
+        segments.Add(s31);
+        segments.Add(s32);
+        segments.Add(s33);
+        segments.Add(s34);
+        segments.Add(s35);
+        segments.Add(s36);
+        segments.Add(s37);
+        segments.Add(s38);
 
 
         var track1 = new Track("Путь 1", [s2]);
