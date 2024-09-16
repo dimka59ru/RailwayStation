@@ -38,6 +38,22 @@ public abstract class StationBase
         }
         return null;
     }
+
+    public List<Segment> ConvertPointPath2SegmentPath(List<Point> pointPath) {
+        var segmentPath = new List<Segment>();
+
+        for (int i = 0; i < pointPath.Count - 1; i++) {
+            var segment = GetSegment(pointPath[i], pointPath[i + 1]);
+            if (segment != null) {
+                segmentPath.Add(segment);
+            }
+            else {
+                // Путь не найден
+                return [];
+            }
+        }
+        return segmentPath;
+    }
 }
 
 public class Station : StationBase

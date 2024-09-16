@@ -34,10 +34,10 @@ public class FindShortPathWaveMethod : IFindPathOnStationStrategy
 
         if (path1.Count < path2.Count) 
         {
-            ConvertPointPath2SegmentPath(station, path1);
+            return station.ConvertPointPath2SegmentPath(path1);
         }
         
-        return ConvertPointPath2SegmentPath(station, path2);
+        return station.ConvertPointPath2SegmentPath(path2);
     }
 
 
@@ -127,25 +127,5 @@ public class FindShortPathWaveMethod : IFindPathOnStationStrategy
         }
 
         return foundPath;
-    }
-
-    private static List<Segment> ConvertPointPath2SegmentPath(StationBase station, List<Point> pointPath) 
-    {
-        var segmentPath = new List<Segment>();
-
-        for (int i = 0; i < pointPath.Count - 1; i++) 
-        {
-            var segment = station.GetSegment(pointPath[i], pointPath[i + 1]);
-            if (segment != null) 
-            {
-                segmentPath.Add(segment);
-            }
-            else 
-            {
-                // Путь не найден
-                return [];
-            }
-        }
-        return segmentPath;
-    }
+    }   
 }
