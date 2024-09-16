@@ -4,13 +4,16 @@ using RailwayStation.Models.Station;
 namespace RailwayStation.Algorithms;
 public class FindShortPathWaveMethod : IFindPathOnStationStrategy
 {
-    public List<Point> FindPath(StationBase station, int startSegmentIndex, int targetSegmentIndex) {
+    public List<Segment> FindPath(StationBase station, int startSegmentIndex, int targetSegmentIndex) 
+    {
 
-        if (startSegmentIndex < 1 || startSegmentIndex > station.Segments.Count) {
+        if (startSegmentIndex < 1 || startSegmentIndex > station.Segments.Count) 
+        {
             throw new ArgumentOutOfRangeException($"{nameof(startSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
         }
 
-        if (targetSegmentIndex < 1 || targetSegmentIndex > station.Segments.Count) {
+        if (targetSegmentIndex < 1 || targetSegmentIndex > station.Segments.Count) 
+        {
             throw new ArgumentOutOfRangeException($"{nameof(targetSegmentIndex)} не может быть меньше 1 и больше {station.Segments.Count}");
         }
         
@@ -27,16 +30,24 @@ public class FindShortPathWaveMethod : IFindPathOnStationStrategy
         var path1 = FindPathInternal(station, startPointFromIndex, targetSegmentIndex);
 
         // Ищем от узла To заданного участка
-        var path2 = FindPathInternal(station, startPointToIndex, targetSegmentIndex);
+        var path2 = FindPathInternal(station, startPointToIndex, targetSegmentIndex);        
 
-        if (path1.Count < path2.Count) {
-            return path1;
+        if (path1.Count < path2.Count) 
+        {
+            ConvertPointPath2SegmentPath(station, path1);
         }
         
-        return path2;       
+        return ConvertPointPath2SegmentPath(station, path2);
     }
 
 
+    /// <summary>
+    /// Поиск кратчайшего пути волновым способом
+    /// </summary>
+    /// <param name="station"></param>
+    /// <param name="startPointIndex"></param>
+    /// <param name="targetSegmentIndex">Индекс целевого участка</param>
+    /// <returns>Список узлов пути</returns>
     private static List<Point> FindPathInternal(StationBase station, int startPointIndex, int targetSegmentIndex) 
     {
         var foundPath = new List<Point>();
@@ -116,5 +127,25 @@ public class FindShortPathWaveMethod : IFindPathOnStationStrategy
         }
 
         return foundPath;
+    }
+
+    private static List<Segment> ConvertPointPath2SegmentPath(StationBase station, List<Point> pointPath) 
+    {
+        var segmentPath = new List<Segment>();
+
+        for (int i = 0; i < pointPath.Count - 1; i++) 
+        {
+            var segment = station.GetSegment(pointPath[i], pointPath[i + 1]);
+            if (segment != null) 
+            {
+                segmentPath.Add(segment);
+            }
+            else 
+            {
+                // Путь не найден
+                return [];
+            }
+        }
+        return segmentPath;
     }
 }

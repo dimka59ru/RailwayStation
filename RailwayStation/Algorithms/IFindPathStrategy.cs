@@ -8,4 +8,4 @@ public interface IFindPathStrategy<G, V>
     List<V> FindPath(G graph, int startIndex, int targetIndex);
 }
 
-public interface IFindPathOnStationStrategy : IFindPathStrategy<StationBase, Point> { }
+public interface IFindPathOnStationStrategy : IFindPathStrategy<StationBase, Segment> { }

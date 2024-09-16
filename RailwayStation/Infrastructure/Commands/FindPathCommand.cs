@@ -45,8 +45,8 @@ public class FindPathCommand : NonTerminatingCommand
             var pathBuilder = new StringBuilder();
             for (var i = 0; i < foundPath.Count; i++) 
             {
-                var point = foundPath[i];
-                pathBuilder.Append($"{point.Name}");
+                var segment = foundPath[i];
+                pathBuilder.Append($"{segment.Name}");
                 
                 if (i < foundPath.Count - 1) 
                 {                    

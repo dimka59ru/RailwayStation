@@ -23,15 +23,15 @@ public abstract class StationBase
         return result;
     }
 
-    public Segment? GetSegment(Point point) 
+    public Segment? GetSegment(Point point1, Point point2) 
     {
         foreach (var segment in Segments) 
         {
-            if (segment.From == point) 
+            if (segment.From == point1 && segment.To == point2) 
             {
                 return segment;
             }
-            if (segment.To == point) 
+            if (segment.From == point2 && segment.To == point1) 
             {
                 return segment;
             }
