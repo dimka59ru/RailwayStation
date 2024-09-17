@@ -1,8 +1,8 @@
-using RailwayStation.Helpers;
+using RailwayStation.Algorithms.Helpers;
 using RailwayStation.Models.Station;
 
 namespace RailwayStation.Algorithms;
-internal class FindShortPathDijkstraMathod : IFindPathOnStationStrategy
+public class FindShortPathDijkstraMathod : IFindPathOnStationStrategy
 {
     public List<Segment> FindPath(StationBase station, int startSegmentIndex, int targetSegmentIndex) 
     {

@@ -1,4 +1,4 @@
-namespace RailwayStation.Helpers;
+namespace RailwayStation.Algorithms.Helpers;
 public static class EnumerableExtensions
 {
     public static int FindIndex<T>(this IEnumerable<T> list, Func<T, bool> predicate) {

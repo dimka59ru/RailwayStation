@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailwayStation.Models", "Ra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayStation.Tests", "RailwayStation.Tests\RailwayStation.Tests.csproj", "{A1C01029-A07B-44B9-83EC-4BB654B39E64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RailwayStation.Algorithms", "RailwayStation.Algorithms\RailwayStation.Algorithms.csproj", "{D089128D-3F1D-46A1-B57F-901D504C7A3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{A1C01029-A07B-44B9-83EC-4BB654B39E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1C01029-A07B-44B9-83EC-4BB654B39E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C01029-A07B-44B9-83EC-4BB654B39E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D089128D-3F1D-46A1-B57F-901D504C7A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D089128D-3F1D-46A1-B57F-901D504C7A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D089128D-3F1D-46A1-B57F-901D504C7A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D089128D-3F1D-46A1-B57F-901D504C7A3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

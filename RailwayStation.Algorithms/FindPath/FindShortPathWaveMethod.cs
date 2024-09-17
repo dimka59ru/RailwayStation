@@ -1,4 +1,4 @@
-using RailwayStation.Helpers;
+using RailwayStation.Algorithms.Helpers;
 using RailwayStation.Models.Station;
 
 namespace RailwayStation.Algorithms;
