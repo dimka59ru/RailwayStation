@@ -2,7 +2,7 @@ using RailwayStation.Algorithms.Helpers;
 using RailwayStation.Models.Station;
 
 namespace RailwayStation.Algorithms;
-public class FindShortPathDijkstraMathod : IFindPathOnStationStrategy
+public class FindShortPathDijkstraMethod : IFindPathOnStationStrategy
 {
     public List<Segment> FindPath(StationBase station, int startSegmentIndex, int targetSegmentIndex) 
     {
