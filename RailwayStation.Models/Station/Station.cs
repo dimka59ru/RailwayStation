@@ -163,7 +163,7 @@ public class Station : StationBase
 
         var park1 = new Park("Парк 1", [track1, track2]);
         var park2 = new Park("Парк 2", [track4, track7]);
-        var park3 = new Park("Парк 2", [track5, track6, track7, track8]);
+        var park3 = new Park("Парк 3", [track5, track6, track7, track8]);
 
         parks.Add(park1);
         parks.Add(park2);

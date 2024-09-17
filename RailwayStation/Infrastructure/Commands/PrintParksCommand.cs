@@ -15,11 +15,13 @@ public class PrintParksCommand : NonTerminatingCommand
 
     internal override bool InternalCommand() 
     {
-        foreach (var park in station.Parks) 
+        
+        foreach (var parkName in station.Parks.Select(park => park.Name)) 
         {
-            var traks = park.Traks.Select(t => t.Name);
-            var traksNames = string.Join(", ", traks);
-            UserInterface.WriteMessage($"{park.Name}: [{traksNames}]");
+            var parkVertices = fillingAlgo.GetParkVertices(station, parkName);
+            var verticesNamesArray = parkVertices.Select(t => t.Name);
+            var verticesNames = string.Join(", ", verticesNamesArray);
+            UserInterface.WriteMessage($"{parkName}: [{verticesNames}]");
         }
         return true;
     }
