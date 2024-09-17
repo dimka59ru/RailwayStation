@@ -5,6 +5,7 @@ public abstract class StationBase
     public abstract IReadOnlyList<Point> Points { get; }
     public abstract IReadOnlyList<Segment> Segments { get; }
     public abstract IReadOnlyList<Track> Traks { get; }
+    public abstract IReadOnlyList<Park> Parks { get; }
 
     /// <summary>
     /// Вывод смежных вершин и расстояний до них
@@ -48,10 +49,12 @@ public class Station : StationBase
     private readonly List<Point> points = [];
     private readonly List<Segment> segments = [];
     private readonly List<Track> traks = [];
+    private readonly List<Park> parks = [];
 
     public override  IReadOnlyList<Point> Points => points;
     public override  IReadOnlyList<Segment> Segments => segments;
     public override  IReadOnlyList<Track> Traks => traks;
+    public override  IReadOnlyList<Park> Parks => parks;
 
     public Station() 
     {
@@ -157,5 +160,13 @@ public class Station : StationBase
         traks.Add(track6);
         traks.Add(track7);
         traks.Add(track8);
+
+        var park1 = new Park("Парк 1", [track1, track2]);
+        var park2 = new Park("Парк 2", [track4, track7]);
+        var park3 = new Park("Парк 2", [track5, track6, track7, track8]);
+
+        parks.Add(park1);
+        parks.Add(park2);
+        parks.Add(park3);
     }    
 }

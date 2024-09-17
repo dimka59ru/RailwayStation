@@ -26,7 +26,7 @@ public class StationInfoService : IStationInfoService
 
         while (!response.souldQuit) 
         {
-            var input = userInterface.ReadValue("> ");
+            var input = userInterface.ReadValue("\r\n> ");
             var command = commandFactory.GetCommand(input);
             response = command.Run();
 

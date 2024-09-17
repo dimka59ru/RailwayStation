@@ -26,7 +26,8 @@ public class AppCommandFactory : IAppCommandFactory
             "q" or "quit" => new QuitCommand(userInterface),
             "fw" or "findwave" => new FindPathCommand(userInterface, new FindShortPathWaveMethod(), station),
             "fd" or "finddijkstra" => new FindPathCommand(userInterface, new FindShortPathDijkstraMethod(), station),
-            "p" or "print" => new PrintSegmentsCommand(userInterface, station),
+            "ps" or "printsegments" => new PrintSegmentsCommand(userInterface, station),
+            "pp" or "printparks" => new PrintParksCommand(userInterface, station),
             "?" => new HelpCommand(userInterface),
             _ => new UnknownCommand(userInterface),
         };
