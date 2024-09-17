@@ -29,8 +29,9 @@ public class AppCommandFactory : IAppCommandFactory
             "fd" or "finddijkstra" => new FindPathCommand(userInterface, new FindShortPathDijkstraMethod(), station),
             "ps" or "printsegments" => new PrintSegmentsCommand(userInterface, station),
             "pp" or "printparks" => new PrintParksCommand(userInterface, new FillingPark(), station),
+            "n" or "neighbours" => new PrintNeighboursCommand(userInterface, station),
             "?" => new HelpCommand(userInterface),
-            _ => new UnknownCommand(userInterface),
+            _ => new UnknownCommand(userInterface),            
         };
     }
 }

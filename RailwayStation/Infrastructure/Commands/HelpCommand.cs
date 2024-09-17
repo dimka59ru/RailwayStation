@@ -14,6 +14,7 @@ public class HelpCommand : NonTerminatingCommand
         UserInterface.WriteMessage("\tНапечатать все парки схемы станции (pp)");
         UserInterface.WriteMessage("\tПоиск кратчайщего пути волновым методом (без учета веса) (fw)");
         UserInterface.WriteMessage("\tПоиск кратчайщего пути методом  Дейкстры (fd)");
+        UserInterface.WriteMessage("\tНапечатать соседей каждой точки (n)");
         UserInterface.WriteMessage("\tСправка (?)");
         return true;
     }
