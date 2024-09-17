@@ -23,8 +23,11 @@ public abstract class StationBase
         return result;
     }
 
-    public Segment? GetSegment(Point point1, Point point2) 
+    public Segment? GetSegment(int indexPoint1, int indexPoint2) 
     {
+        var point1 = Points[indexPoint1];
+        var point2 = Points[indexPoint2];
+
         foreach (var segment in Segments) 
         {
             if (segment.From == point1 && segment.To == point2) 
@@ -37,23 +40,7 @@ public abstract class StationBase
             }
         }
         return null;
-    }
-
-    public List<Segment> ConvertPointPath2SegmentPath(List<Point> pointPath) {
-        var segmentPath = new List<Segment>();
-
-        for (int i = 0; i < pointPath.Count - 1; i++) {
-            var segment = GetSegment(pointPath[i], pointPath[i + 1]);
-            if (segment != null) {
-                segmentPath.Add(segment);
-            }
-            else {
-                // Путь не найден
-                return [];
-            }
-        }
-        return segmentPath;
-    }
+    }    
 }
 
 public class Station : StationBase
@@ -160,6 +147,15 @@ public class Station : StationBase
         var track5 = new Track("Путь 5", [s13, s14, s15]);
         var track6 = new Track("Путь 6", [s17, s18]);
         var track7 = new Track("Путь 7", [s19, s20, s21]);
-        var track8 = new Track("Путь 8", [s23]);        
+        var track8 = new Track("Путь 8", [s23]);
+
+        traks.Add(track1);
+        traks.Add(track2);
+        traks.Add(track3);
+        traks.Add(track4);
+        traks.Add(track5);
+        traks.Add(track6);
+        traks.Add(track7);
+        traks.Add(track8);
     }    
 }

@@ -23,6 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RailwayStation.Algorithms\RailwayStation.Algorithms.csproj" />
+    <ProjectReference Include="..\RailwayStation.Models\RailwayStation.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
