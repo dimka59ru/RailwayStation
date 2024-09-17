@@ -41,7 +41,7 @@ public abstract class StationBase
             }
         }
         return null;
-    }    
+    } 
 }
 
 public class Station : StationBase

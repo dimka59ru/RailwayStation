@@ -1,4 +1,5 @@
 using RailwayStation.Algorithms;
+using RailwayStation.Algorithms.Filling;
 using RailwayStation.Infrastructure.Commands;
 using RailwayStation.Models;
 using RailwayStation.Models.Station;
@@ -27,7 +28,7 @@ public class AppCommandFactory : IAppCommandFactory
             "fw" or "findwave" => new FindPathCommand(userInterface, new FindShortPathWaveMethod(), station),
             "fd" or "finddijkstra" => new FindPathCommand(userInterface, new FindShortPathDijkstraMethod(), station),
             "ps" or "printsegments" => new PrintSegmentsCommand(userInterface, station),
-            "pp" or "printparks" => new PrintParksCommand(userInterface, station),
+            "pp" or "printparks" => new PrintParksCommand(userInterface, new FillingPark(), station),
             "?" => new HelpCommand(userInterface),
             _ => new UnknownCommand(userInterface),
         };

@@ -1,12 +1,15 @@
+using RailwayStation.Algorithms.Filling;
 using RailwayStation.Models;
 using RailwayStation.Models.Station;
 
 namespace RailwayStation.Infrastructure.Commands;
 public class PrintParksCommand : NonTerminatingCommand
 {
+    private readonly IFillingStrategy fillingAlgo;
     private readonly StationBase station;
-    public PrintParksCommand(IUserInterface userInterface, StationBase station) : base(userInterface) 
+    public PrintParksCommand(IUserInterface userInterface, IFillingStrategy fillingAlgo, StationBase station) : base(userInterface) 
     {
+        this.fillingAlgo = fillingAlgo ?? throw new ArgumentNullException(nameof(fillingAlgo));
         this.station = station ?? throw new ArgumentNullException(nameof(station));
     }
 
