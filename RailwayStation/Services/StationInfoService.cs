@@ -16,9 +16,7 @@ public class StationInfoService : IStationInfoService
     {
         this.userInterface = userInterface ?? throw new ArgumentNullException(nameof(userInterface));
         this.commandFactory = commandFactory ?? throw new ArgumentNullException(nameof(commandFactory));
-    }
-
-   
+    }   
 
     public void Run() 
     {

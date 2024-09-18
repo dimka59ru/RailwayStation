@@ -65,7 +65,6 @@ public class FindPathCommand : NonTerminatingCommand
         return true;
     }
 
-    // TODO добавить проверку на диапазон
     private bool GetParameters() 
     {
         if (FromIndex == null) 

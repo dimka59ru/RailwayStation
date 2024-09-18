@@ -2,12 +2,14 @@ using RailwayStation.Algorithms.Filling;
 using RailwayStation.Models.Station;
 
 namespace RailwayStation.Tests;
-public class FillingParkTests {
+public class FillingParkTests 
+{
     [Theory]
     [InlineData("Парк 1", 4)]
     [InlineData("Парк 2", 4)]
     [InlineData("Парк 3", 8)]
-    public void GetParkVerticesCount(string parkName, int verticesCount) {
+    public void GetParkVerticesCount(string parkName, int verticesCount) 
+    {
         StationBase station = new Station();
         var fillingAlgo = new FillingPark();
         var parkVertices = fillingAlgo.GetParkVertices(station, parkName);

@@ -1,21 +1,20 @@
-namespace RailwayStation.Models.Station
-{
-    public class Track
-    {
-        public string Name { get; set; }     
-        public IReadOnlyList<Segment> Segments { get; }
-        
-        public Track(string name, List<Segment> segments) 
-        {
-            if (string.IsNullOrEmpty(name)) 
-            {
-                throw new ArgumentException($"\"{nameof(name)}\" не может быть неопределенным или пустым.", nameof(name));
-            }
+namespace RailwayStation.Models.Station;
 
-            Name = name;
-            Segments = segments;
+public class Track
+{
+    public string Name { get; set; }     
+    public IReadOnlyList<Segment> Segments { get; }
+    
+    public Track(string name, List<Segment> segments) 
+    {
+        if (string.IsNullOrEmpty(name)) 
+        {
+            throw new ArgumentException($"\"{nameof(name)}\" не может быть неопределенным или пустым.", nameof(name));
         }
 
-        public override string ToString() => Name;
+        Name = name;
+        Segments = segments;
     }
+
+    public override string ToString() => Name;
 }

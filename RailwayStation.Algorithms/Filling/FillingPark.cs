@@ -5,7 +5,7 @@ public class FillingPark : IFillingStrategy
 {
 
     /// <summary>
-    /// 
+    /// Поиск вершин парка
     /// </summary>
     /// <param name="station"></param>
     /// <param name="parkName">Имя парка</param>
